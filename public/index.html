@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Timer App</h1>
+    <input type="number" id="duration" placeholder="Enter duration in seconds">
+    <button id="start">Start Timer</button>
+    <h2 id="display"></h2>
+
+    <script>
+        document.getElementById('start').addEventListener('click', () => {
+            const duration = parseInt(document.getElementById('duration').value);
+            if (isNaN(duration) || duration <= 0) {
+                alert('Please enter a valid positive number.');
+                return;
+            }
+
+            let timeRemaining = duration;
+            const display = document.getElementById('display');
+
+            const intervalId = setInterval(() => {
+                if (timeRemaining > 0) {
+                    display.textContent = `Time remaining: ${timeRemaining} seconds`;
+                    timeRemaining--;
+                } else {
+                    clearInterval(intervalId);
+                    display.textContent = 'Time is up!';
+                }
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
